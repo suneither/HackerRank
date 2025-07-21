@@ -1,3 +1,5 @@
+output
+intermediate
 *.sln
 *.vcxproj
 *.vcxproj.filters
