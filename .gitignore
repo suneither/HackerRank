@@ -1,5 +1,4 @@
-output
-intermediate
+build
 *.sln
 *.vcxproj
 *.vcxproj.filters
