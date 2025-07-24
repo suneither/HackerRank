@@ -27,7 +27,8 @@ For example, a function to return the sum of four parameters can be written as
 Write a function int max_of_four(int a, int b, int c, int d) which returns the maximum of the four arguments it receives.
 
 ```
-    += : Add and assignment operator. It adds the right operand to the left operand and assigns the result to the left operand.
+    += : Add and assignment operator. It adds the right operand to the left 
+    operand and assigns the result to the left operand.
     a += b is equivalent to a = a + b;
 ```
 
@@ -37,7 +38,7 @@ Input will contain four integers - $a,b,c,d$ , one per line.
 
 **Output Format**
 
-Return the greatest of the four integers.
+Return the greatest of the four integers.  
 PS: I/O will be automatically handled.
 
 **Sample Input**
