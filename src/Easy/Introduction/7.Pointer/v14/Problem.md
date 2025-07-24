@@ -1,6 +1,6 @@
 A pointer in C++ is used to share a memory address among different contexts (primarily functions). They are used whenever a function needs to modify the content of a variable, but it does not have ownership.
 
-In order to access the memory address of a variable, $val$, prepend it with $\&$ sign. For example, `&val` returns the memory address of $val$.
+In order to access the memory address of a variable, $val$, prepend it with $\&$ sign. For example, $\&val$ returns the memory address of $val$.
 
 This memory address is assigned to a pointer and can be shared among functions. For example, $int \ *p = \&val$ assigns the memory address of $val$ to pointer $p$. To access the content of the memory pointed to, prepend the variable name with a $*$. For example, $*p$ will return the value stored in $val$ and any modification to it will be performed on $val$.
 
