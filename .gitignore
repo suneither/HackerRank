@@ -7,4 +7,3 @@ build
 *.exe
 *.log
 .vs/
-.vscode

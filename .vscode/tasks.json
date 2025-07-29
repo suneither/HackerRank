@@ -1,0 +1,42 @@
+{
+  "tasks": [
+    {
+      "label": "Create Build Folder",
+      "type": "shell",
+      "command": "cmd.exe",
+      "args": [
+        "/c",
+        "if not exist \"\"\"${fileDirname}\\build\"\"\" mkdir \"\"\"${fileDirname}\\build\"\"\""
+      ],
+      "problemMatcher": [],
+      "detail": "Creates build folder."
+    },
+    {
+      "label": "Compile c++ file",
+      "type": "shell",
+      "command": "cl.exe",
+      "args": [
+        "/Zi",
+        "/EHsc",
+        "/Fe:",
+        "${fileDirname}\\build\\${fileBasenameNoExtension}.exe",
+        "${file}",
+      ],
+      "options": {
+        "cwd": "${fileDirname}\\build"
+      },
+      "problemMatcher": [
+        "$msCompile"
+      ],
+      "dependsOn": [
+        "Create Build Folder"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "Compiles C++ files."
+    }
+  ],
+  "version": "2.0.0"
+}
