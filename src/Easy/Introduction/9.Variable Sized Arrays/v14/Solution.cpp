@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -7,7 +8,7 @@ void solveWithVectors();
 
 int main()
 {
-    solveWithArrays();
+    solveWithVectors();
 }
 
 void solveWithArrays()
@@ -48,4 +49,41 @@ void solveWithArrays()
 
 void solveWithVectors()
 {
+    int n, q;
+    cin >> n >> q;
+
+    vector<vector<int>> sequences;
+    vector<vector<int>> queries;
+
+    while (n > 0)
+    {
+        int k;
+        cin >> k;
+
+        vector<int> sequence;
+        while (k > 0)
+        {
+            int element;
+            cin >> element;
+            sequence.push_back(element);
+            k--;
+        }
+        sequences.push_back(sequence);
+
+        n--;
+    }
+
+    while (q > 0)
+    {
+        int i, j;
+        cin >> i >> j;
+        vector<int> query;
+        query.push_back(i);
+        query.push_back(j);
+        queries.push_back(query);
+        q--;
+    }
+
+    for (vector<int> query : queries)
+        cout << sequences[query[0]][query[1]] << endl;
 }
