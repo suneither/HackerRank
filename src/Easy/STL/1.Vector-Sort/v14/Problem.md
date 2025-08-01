@@ -27,7 +27,7 @@ Store the $N$ integers in a vector. Vectors are sequence containers representing
     sort(v.begin(),v.end()); (Will sort all the elements in the vector)
 ```
 
-To know more about vectors, [Click Here](https://cplusplus.com/reference/vector/vector/)
+More information about [vectors](https://cplusplus.com/reference/vector/vector/), [sort](https://cplusplus.com/reference/algorithm/sort/?kw=sort)  and other [algorithms](https://cplusplus.com/reference/algorithm/).
 
 **Input Format**
 
