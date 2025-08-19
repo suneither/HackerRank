@@ -31,7 +31,7 @@ The above statement should print $a + ib$ followed by a newline where $a = c.a$ 
 
 **Input Format**
 
-The overloaded operator `+` should receive two complex numbers ($a + ib$ and $c + id) as parameters. It must return a single complex number.
+The overloaded operator `+` should receive two complex numbers ($a + ib$ and $c + id$) as parameters. It must return a single complex number.
 
 The overloaded operator `<<` should add $a + ib$ to the stream where $a$ is the real part and $b$ is the imaginary part of the complex number which is then passed as a parameter to the overloaded operator.
 
