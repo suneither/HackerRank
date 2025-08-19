@@ -3,11 +3,12 @@ Preprocessor directives are lines included in the code preceded by a hash sign (
 ```
     #define INF 10000000
     if( val == INF) {
-    //Do something
+        //Do something
     }
+    
     After the preprocessor has replaced the directives, the code will be
     if( val == 10000000) { //Here INF is replaced by the value with which it's defined.
-    //Do something
+        //Do something
     }
 ```
 
