@@ -2,6 +2,8 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <sstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -38,7 +40,7 @@ public:
     {
         m_childs.push_back(tree);
     }
-    string findAttribute(string attribute_name)
+    string findAttribute(const string &attribute_name)
     {
         map<string, string>::iterator it;
         if ((it = m_attributes.find(attribute_name)) == m_attributes.end())
@@ -48,40 +50,29 @@ public:
     }
     void parseHRMLTagLine(string tag_line)
     {
-        parseTag(tag_line);
-        parseAttributes(tag_line);
+        tag_line = tag_line.substr(1, tag_line.size() - 2);
+        string attributes = parseTag(tag_line);
+        parseAttributes2(attributes);
     }
-    void parseTag(string tag_line)
+    string parseTag(const string &tag_line)
     {
-        tag_line = tag_line.substr(0, tag_line.size() - 1);
-        int tag_end = tag_line.find(" ");
-        string tag = tag_line.substr(1, tag_end - 1);
+        int end = tag_line.find(' ');
+        if (end == string::npos)
+            end = tag_line.size();
+
+        string tag = tag_line.substr(0, end);
         setTag(tag);
+
+        return tag_line.substr(end);
     }
-    void parseAttributes(string tag_line)
+    void parseAttributes2(const string &attributes)
     {
-        // logic:
-        // find = sign then find attribute to the left of = sign then find value to the right of = sign
-        // sample input: <tag8 intval = "34" floatval = "9.845">
-        string attribute, value;
-        int equal_pos = 0;
-        // equal_offset is there to ignore first space before or after equal sign
-        int equal_offset = 2;
-        while ((equal_pos = tag_line.find("=", equal_pos)) != string::npos)
+        istringstream iss(attributes);
+        string attribute_name, delimiter, attribute_value;
+
+        while (iss >> attribute_name >> delimiter >> quoted(attribute_value))
         {
-            // find attribute
-            int left_end = equal_pos - equal_offset;
-            int left_start = tag_line.find_last_of(" ", left_end) + 1;
-            attribute = tag_line.substr(left_start, left_end - left_start + 1);
-
-            // find value
-            int right_start = tag_line.find("\"", equal_pos) + 1;
-            int right_end = tag_line.find("\"", right_start);
-            value = tag_line.substr(right_start, right_end - right_start);
-
-            m_attributes[attribute] = value;
-
-            equal_pos++;
+            m_attributes[attribute_name] = attribute_value;
         }
     }
     ~HRMLTree()
@@ -95,12 +86,13 @@ public:
 
 string readLine()
 {
-    char temp_tag_line[200];
-    cin.getline(temp_tag_line, 200);
-    return string(temp_tag_line);
+    string line;
+    line.reserve(200);
+    getline(cin, line);
+    return line;
 }
 
-void readHRMLTree(HRMLTree *root, uint16_t tag_lines_count)
+void readHRMLTree(HRMLTree *parent, uint16_t tag_lines_count)
 {
     while (tag_lines_count > 0)
     {
@@ -108,70 +100,59 @@ void readHRMLTree(HRMLTree *root, uint16_t tag_lines_count)
 
         if (tag_line[1] == '/') // is ending tag?
         {
-            root = root->getParent();
+            parent = parent->getParent();
         }
         else
         {
             HRMLTree *child = new HRMLTree;
             child->parseHRMLTagLine(tag_line);
-            child->setParent(root);
-            root->addChild(child);
-            root = child;
+            child->setParent(parent);
+            parent->addChild(child);
+            parent = child;
         }
         tag_lines_count--;
     }
 }
 
-void printQueries(HRMLTree *root, uint16_t query_count)
+HRMLTree *findChild(HRMLTree *parent, const string &tag)
 {
-    HRMLTree *root_ref;
+    for (HRMLTree *child : parent->getChilds())
+    {
+        if (child->getTag() == tag)
+            return child;
+    }
+
+    return nullptr;
+}
+
+void printQueries(HRMLTree *parent, uint16_t query_count)
+{
     while (query_count > 0)
     {
-        root_ref = root;
-        bool found = true;
-
         string query = readLine();
-        int tilde_index = query.find('~');
-        string attribute_name = query.substr(tilde_index + 1, query.size() - tilde_index);
-        query = query.substr(0, tilde_index);
 
-        int pos = 0;
-        int from = 0;
-        while ((pos = query.find('.')) != string::npos && found)
+        // split attribute name and tags
+        int tilde_index = query.find('~');
+        string attribute_name = query.substr(tilde_index + 1);
+        string tags = query.substr(0, tilde_index);
+
+        // loop over tags
+        HRMLTree *parent_ref = parent;
+        istringstream iss(tags);
+        string tag;
+
+        while (getline(iss, tag, '.'))
         {
-            string tag = query.substr(from, pos);
-            for (HRMLTree *child : root_ref->getChilds())
-            {
-                if (tag == child->getTag())
-                {
-                    found = true;
-                    query = query.substr(pos + 1, query.size() - pos);
-                    root_ref = child;
-                    break;
-                }
-                found = false;
-            }
+            parent_ref = findChild(parent_ref, tag);
+            if (!parent_ref)
+                break;
         }
 
-        string tag = query;
-        if (root_ref->getChilds().size() == 0)
-            found = false;
-        else
-            for (HRMLTree *child : root_ref->getChilds())
-            {
-                if (tag == child->getTag())
-                {
-                    root_ref = child;
-                    found = true;
-                    break;
-                }
-                found = false;
-            }
-
-        if (!found)
+        // print values
+        if (!parent_ref)
             cout << "Not Found!" << endl;
         else
-            cout << root_ref->findAttribute(attribute_name) << endl;
+            cout << parent_ref->findAttribute(attribute_name) << endl;
 
         query_count--;
     }
@@ -184,7 +165,6 @@ int main()
     cin.ignore();
 
     HRMLTree *tree = new HRMLTree;
-    tree->setTag("root");
     readHRMLTree(tree, tag_lines_count);
     printQueries(tree, query_count);
 
