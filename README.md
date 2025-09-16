@@ -27,11 +27,11 @@ Organized by difficulty:
 **🛠️ Compiler & IDE**
 
 - OS: **Windows**  
-- Compiler: **MSVC (cl.exe)**  
+- Compiler: **GCC g++.exe**  
 - IDE: **VS Code**  
 - Build configs: defined in `launch.json` and `tasks.json`  
 
 **▶️ Build & Run**
 
-From a problem folder, build using the provided tasks (VS Code: `Ctrl+Shift+B`).  
+Select `C/C++: g++.exe` compiler and run using `f5`  
 Executables are generated inside the problem’s `build/` directory.
