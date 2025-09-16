@@ -13,20 +13,20 @@
     },
     {
       "label": "Compile c++ file",
-      "type": "shell",
-      "command": "cl.exe",
+      "type": "cppbuild",
+      "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
       "args": [
-        "/Zi",
-        "/EHsc",
-        "/Fe:",
-        "${fileDirname}\\build\\${fileBasenameNoExtension}.exe",
+        "-fdiagnostics-color=always",
+        "-g",
         "${file}",
+        "-o",
+        "${fileDirname}\\build\\${fileBasenameNoExtension}.exe",
       ],
       "options": {
         "cwd": "${fileDirname}\\build"
       },
       "problemMatcher": [
-        "$msCompile"
+        "$gcc"
       ],
       "dependsOn": [
         "Create Build Folder"
