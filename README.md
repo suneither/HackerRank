@@ -29,9 +29,43 @@ Organized by difficulty:
 - OS: **Windows**  
 - Compiler: **GCC g++.exe**  
 - IDE: **VS Code**  
-- Build configs: defined in `launch.json` and `tasks.json`  
+- Build configs: defined in `launch.json` and `tasks.json` 
+> Note: Some of the problems have `CMakeLists.txt` file to build and run `Solution.cpp`
 
 **▶️ Build & Run**
 
+**Using MSVC**  
 Select `C/C++: g++.exe` compiler and run using `f5`  
 Executables are generated inside the problem’s `build/` directory.
+
+**Using CMake**
+
+1. go to any problem directory,  
+```
+    cd {any-solution-dir}
+```
+> Note: replace {any-solution-dir} with actual directory name
+
+2. create build folder
+```
+    mkdir build
+```
+
+3. generate build configuration files
+```
+    cmake build
+```
+
+4. create executable file
+```
+    cmake --build build
+```
+5. navigate to ./build/Debug folder
+```
+    cd ./build/Debug
+```
+6. run executable by running
+```
+    ./{solution-name}
+```
+>  Note: Depending on the shell, the correct syntax may be: {solution-name}, ./{solution-name} or .\\{solution-name}
