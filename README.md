@@ -16,29 +16,19 @@ Organized by difficulty:
 📁 {Difficulty}/
     📁 {Category}/
         📁 {Problem}/
-            📁 {c++ version}/
-                📝 Problem.md
-                📝 Solution.cpp
-                📁 build/
+            📝 Problem.md
+            📝 Solution.cpp
 ```
-
-> ⚠️ Note: Each problem `build/` folder is **!GENERATED!** when Solution.cpp is being compiled.
 
 **🛠️ Compiler & IDE**
 
 - OS: **Windows**  
 - Compiler: **GCC g++.exe**  
 - IDE: **VS Code**  
-- Build configs: defined in `launch.json` and `tasks.json` 
-> Note: Some of the problems have `CMakeLists.txt` file to build and run `Solution.cpp`
+- Build system: **CMake** 
 
-**▶️ Build & Run**
-
-**Using MSVC**  
-Select `C/C++: g++.exe` compiler and run using `f5`  
-Executables are generated inside the problem’s `build/` directory.
-
-**Using CMake**
+**▶️ Build & Run**  
+> Note: Each problem have `CMakeLists.txt` file under its directory
 
 1. go to any problem directory,  
 ```
