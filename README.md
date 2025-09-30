@@ -51,9 +51,9 @@ Executables are generated inside the problem’s `build/` directory.
     mkdir build
 ```
 
-3. generate build configuration files
+3. generate build configuration files using g++ compiler
 ```
-    cmake build
+    cmake -B build -S . -G "MinGW Makefiles" -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++
 ```
 
 4. create executable file
@@ -62,7 +62,7 @@ Executables are generated inside the problem’s `build/` directory.
 ```
 5. navigate to ./build/Debug folder
 ```
-    cd ./build/Debug
+    cd ./build
 ```
 6. run executable by running
 ```
