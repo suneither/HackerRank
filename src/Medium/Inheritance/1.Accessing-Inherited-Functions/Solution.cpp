@@ -9,7 +9,6 @@ public:
     {
         callA = 0;
     }
-
 private:
     int callA;
 
@@ -24,7 +23,6 @@ protected:
         a = a * 2;
         inc();
     }
-
 public:
     int getA()
     {
@@ -39,7 +37,6 @@ public:
     {
         callB = 0;
     }
-
 private:
     int callB;
 
@@ -47,14 +44,12 @@ private:
     {
         callB++;
     }
-
 protected:
     void func(int& a)
     {
         a = a * 3;
         inc();
     }
-
 public:
     int getB()
     {
@@ -69,7 +64,6 @@ public:
     {
         callC = 0;
     }
-
 private:
     int callC;
 
@@ -77,14 +71,12 @@ private:
     {
         callC++;
     }
-
 protected:
     void func(int& a)
     {
         a = a * 5;
         inc();
     }
-
 public:
     int getC()
     {
@@ -95,7 +87,6 @@ public:
 class D : A, B, C
 {
     int val;
-
 public:
     //Initially val is 1
     D()
