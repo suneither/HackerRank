@@ -3,18 +3,24 @@
 
 using namespace std;
 
-class HotelRoom {
+class HotelRoom
+{
+private:
+    int bedrooms_;
+    int bathrooms_;
+
 public:
     HotelRoom(int bedrooms, int bathrooms)
-    : bedrooms_(bedrooms), bathrooms_(bathrooms) {}
+        : bedrooms_(bedrooms), bathrooms_(bathrooms)
+    {
+    }
 
     virtual int get_price()
     {
         return 50 * bedrooms_ + 100 * bathrooms_;
     }
-private:
-    int bedrooms_;
-    int bathrooms_;
+
+    virtual ~HotelRoom() = default;
 };
 
 class HotelApartment : public HotelRoom
