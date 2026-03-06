@@ -21,8 +21,14 @@ int largest_proper_divisor(int n) {
 // locked by HACKER RANK
 
 void process_input(int n) {
-    int d = largest_proper_divisor(n);
-    cout << "result=" << d << endl;
+    try{
+        int d = largest_proper_divisor(n);
+        cout << "result=" << d << endl;
+    }
+    catch (std::invalid_argument& ex){
+        cout << ex.what() << endl;
+    }
+    cout << "returning control flow to caller" << endl;
 }
 
 // locked by HACKER RANK
