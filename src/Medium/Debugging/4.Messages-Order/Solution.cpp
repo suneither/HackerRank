@@ -1,8 +1,10 @@
+// locked by HackerRank
 #include <iostream>
 #include <algorithm>
 #include <vector>
 
 using namespace std;
+// locked by HackerRank
 
 class Message {
 public:
@@ -20,6 +22,7 @@ public:
     }
 };
 
+// locked by HackerRank
 class Recipient {
 public:
     Recipient() {}
@@ -64,3 +67,4 @@ int main() {
     Network::send_messages(messages, recipient);
     recipient.print_messages();
 }
+// locked by HackerRank
