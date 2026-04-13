@@ -7,6 +7,31 @@
 using namespace std;
 // locked by HackerRank
 
+class Matrix
+{
+public:
+    vector<vector<int>> a;
+    Matrix operator+(const Matrix& b) const
+    {
+        Matrix ans;
+        for (int i = 0; i < a.size(); i++)
+        {
+            const vector<int>& aRow = a[i];
+            const vector<int>& bRow = b.a[i];
+
+            vector<int> sum;
+            sum.reserve(a.size());
+
+            for (int j = 0; j < aRow.size(); j++)
+            {
+                sum.push_back(aRow.at(j) + bRow.at(j));
+            }
+            ans.a.push_back(sum);
+        }
+        return ans;
+    }
+};
+
 // locked by HackerRank
 int main () {
     int cases,k;
@@ -27,9 +52,9 @@ int main () {
             x.a.push_back(b);
         }
         for(i=0;i<n;i++) {
+            vector<int> b;
             int num;
             for(j=0;j<m;j++) {
-            vector<int> b;
                 cin >> num;
                 b.push_back(num);
             }
