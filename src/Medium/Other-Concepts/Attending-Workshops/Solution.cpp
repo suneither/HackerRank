@@ -16,7 +16,7 @@ struct Workshop
 
     bool operator<(const Workshop& b) const
     {
-        return start_time < b.start_time;
+        return end_time < b.end_time && start_time < b.start_time;
     }
 };
 
@@ -30,7 +30,7 @@ struct Available_Workshops
 
 Available_Workshops* initialize (int start_time[], int duration[], int n)
 {
-    auto* available_workshops = new Available_Workshops(n);
+    Available_Workshops* available_workshops = new Available_Workshops(n);
     for (int i = 0; i < n; i++)
     {
         Workshop workshop(start_time[i],duration[i]);
@@ -43,15 +43,11 @@ int CalculateMaxWorkshops(Available_Workshops* ptr)
 {
     int result = 0;
     sort(ptr->workshops.begin(), ptr->workshops.end());
-    for (int i = 0; i < ptr->n; i++)
+    for (int i = 0; i < ptr->n - 1; i++)
     {
-        for (int j = i + 1; j < ptr->n -1; j++)
+        if (ptr->workshops[i].end_time <= ptr->workshops[i+1].end_time)
         {
-            if (ptr->workshops.at(i).end_time <= ptr->workshops.at(j).start_time)
-            {
-                result++;
-                break;
-            }
+            result++;
         }
     }
     return result;
